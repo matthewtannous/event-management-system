@@ -1,0 +1,1 @@
+Event management system written in Java using Spring and JavaFX
