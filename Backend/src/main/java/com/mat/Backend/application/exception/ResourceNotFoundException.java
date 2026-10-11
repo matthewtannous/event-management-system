@@ -1,4 +1,7 @@
-package com.mat.Backend.database.exception;
+package com.mat.Backend.application.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
