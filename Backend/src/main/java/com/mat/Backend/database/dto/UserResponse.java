@@ -1,4 +1,10 @@
 package com.mat.Backend.database.dto;
 
-public class UserResponse {
+public record UserResponse(
+        Long id,
+        String username,
+        String email,
+        String firstName,
+        String lastName
+) {
 }
