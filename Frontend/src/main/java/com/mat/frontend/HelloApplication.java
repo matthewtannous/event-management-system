@@ -9,8 +9,8 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SceneManager.setStage(stage);
-        SceneManager.switchScene("login-view.fxml");
-        stage.setTitle("HELLLLOOOOO");
+        SceneManager.switchScene("login.fxml");
+        stage.setTitle("Event Manager");
         stage.show();
     }
 }
