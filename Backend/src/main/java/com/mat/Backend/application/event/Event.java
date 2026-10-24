@@ -1,10 +1,12 @@
 package com.mat.Backend.application.event;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "events")
@@ -19,10 +21,10 @@ public class Event {
     String name;
 
     @Column(nullable = false)
-    Date fromTime;
+    LocalDateTime fromTime;
 
     @Column(nullable = false)
-    Date toTime;
+    LocalDateTime toTime;
 
     @Column(nullable = false)
     Double ticketPrice;
@@ -31,8 +33,9 @@ public class Event {
     String location;
 
     @Column(nullable = false)
+    @Positive
     Integer capacity;
 
-    @Column(nullable = false)
-    Integer registered;
+    @PositiveOrZero
+    Integer registered; // registered always starts at 0
 }

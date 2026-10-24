@@ -13,6 +13,11 @@ public class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 
+    @ExceptionHandler(ConflictException.class)
+    public ProblemDetail handleConflict(ConflictException exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.getMessage());
+    }
+
     // Unique constraint (e.g. duplicate department name / student email)
     // or foreign key violation (e.g. deleting a department that still has students)
     @ExceptionHandler(DataIntegrityViolationException.class)
