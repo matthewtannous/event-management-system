@@ -30,7 +30,7 @@ public class ApiClient {
     }
 
     public static RegistrationResponse register(String username, String email, String firstName, String lastName, String password) throws ApiException {
-        return post("/register", new RegistrationRequest(username, password, email, firstName, lastName), RegistrationResponse.class);
+        return post("/auth/register", new RegistrationRequest(username, password, email, firstName, lastName), RegistrationResponse.class);
     }
 
 
@@ -100,6 +100,7 @@ public class ApiClient {
 
     private static String extractErrorMessage(String body, int status) {
         try {
+            System.out.println(body.chars());
             JsonNode node = mapper.readTree(body);
             if (node.hasNonNull("detail")) {
                 return node.get("detail").asText();
