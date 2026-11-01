@@ -1,10 +1,12 @@
-package com.mat.Backend.application.attendant;
+package com.mat.Backend.application.announcement;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record AttendantRequest(
+public record AnnouncementRequest(
+        @NotBlank String message,
+        @NotNull boolean isPublic,
         @NotNull Long userId,
         @NotNull Long eventId
 ) {

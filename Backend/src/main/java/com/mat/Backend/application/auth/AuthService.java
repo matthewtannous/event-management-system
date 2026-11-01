@@ -22,7 +22,7 @@ public class AuthService {
         User user = repository.findByUsername(loginRequest.username()).orElseThrow(() -> new ResourceNotFoundException("Invalid Usernmame or Password"));
 
         if (!passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
-            throw new ResourceNotFoundException("Invalid Usernmame or Password");
+            throw new ResourceNotFoundException("Invalid Username or Password");
         }
 
         return new LoginResponse(user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getEmail());

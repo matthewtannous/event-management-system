@@ -1,4 +1,4 @@
-package com.mat.Backend.application.attendant;
+package com.mat.Backend.application.participant;
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -7,32 +7,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/attendants")
-public class AttendantController {
-    private final AttendantService service;
+@RequestMapping("/api/participants")
+public class ParticipantController {
+    private final ParticipantService service;
 
-    public AttendantController(AttendantService service) {
+    public ParticipantController(ParticipantService service) {
         this.service = service;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AttendantResponse create(@Valid @RequestBody AttendantRequest request) {
+    public ParticipantResponse create(@Valid @RequestBody ParticipantRequest request) {
         return service.create(request);
     }
 
     @GetMapping
-    public List<AttendantResponse> getAll() {
+    public List<ParticipantResponse> getAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public AttendantResponse getById(@PathVariable Long id) {
+    public ParticipantResponse getById(@PathVariable Long id) {
         return service.findById(id);
     }
 
 //    @PutMapping("/{id}")
-//    public AttendantResponse update(@PathVariable Long id, @Valid @RequestBody AttendantRequest request) {
+//    public ParticipantResponse update(@PathVariable Long id, @Valid @RequestBody ParticipantRequest request) {
 //        return service.update(id, request);
 //    }
 

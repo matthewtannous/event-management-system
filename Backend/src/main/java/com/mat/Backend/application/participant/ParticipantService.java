@@ -1,4 +1,4 @@
-package com.mat.Backend.application.attendant;
+package com.mat.Backend.application.participant;
 
 import com.mat.Backend.application.event.Event;
 import com.mat.Backend.application.event.EventRepository;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AttendantService {
-    private final AttendantRepository repository;
+public class ParticipantService {
+    private final ParticipantRepository repository;
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
-    private final AttendantMapper mapper;
+    private final ParticipantMapper mapper;
 
-    public AttendantService(AttendantRepository repository, UserRepository userRepository, EventRepository eventRepository, AttendantMapper mapper) {
+    public ParticipantService(ParticipantRepository repository, UserRepository userRepository, EventRepository eventRepository, ParticipantMapper mapper) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
@@ -28,7 +28,7 @@ public class AttendantService {
     }
 
     @Transactional
-    public AttendantResponse create(AttendantRequest request) {
+    public ParticipantResponse create(ParticipantRequest request) {
         User user = userRepository
                 .findById(request.userId())
                 .orElseThrow(
@@ -37,7 +37,7 @@ public class AttendantService {
         Event event = eventRepository
                 .findById(request.eventId())
                 .orElseThrow(
-                        () -> new ResourceNotFoundException("User not found")
+                        () -> new ResourceNotFoundException("Event not found")
                 );
         if (event.getCapacity() >= event.getRegistered()) {
             throw new ConflictException("Event is full. You can't register");
@@ -45,12 +45,12 @@ public class AttendantService {
         // Add one person to the event registration
         event.setRegistered(event.getRegistered() + 1);
 
-        Attendant attendant = mapper.toEntity(request, user, event);
-        return mapper.toResponse(repository.save(attendant));
+        Participant participant = mapper.toEntity(request, user, event);
+        return mapper.toResponse(repository.save(participant));
     }
 
     @Transactional
-    public List<AttendantResponse> findAll() {
+    public List<ParticipantResponse> findAll() {
         return repository
                 .findAll()
                 .stream()
@@ -59,14 +59,14 @@ public class AttendantService {
     }
 
     @Transactional
-    public AttendantResponse findById(Long id) {
+    public ParticipantResponse findById(Long id) {
         return mapper.toResponse(findEntity(id));
     }
 
 //    Should not exist. User cannot "change" his registration. He must unregister from an event and register to a new one
 //    @Transactional
-//    public AttendantResponse update(Long id, AttendantRequest request) {
-//        Attendant attendant = findEntity(id);
+//    public ParticipantResponse update(Long id, ParticipantRequest request) {
+//        Participant participant = findEntity(id);
 //        User user = userRepository.findById(request.userId())
 //                .orElseThrow(
 //                        () -> new ResourceNotFoundException("User not found")
@@ -77,22 +77,26 @@ public class AttendantService {
 //                        () -> new ResourceNotFoundException("Event not found")
 //                );
 //
-//        mapper.updateEntity(attendant, request, user, event);
-//        Attendant updatedAttendant = repository.save(attendant);
+//        mapper.updateEntity(participant, request, user, event);
+//        Participant updatedParticipant = repository.save(participant);
 //
-//        return mapper.toResponse(updatedAttendant);
+//        return mapper.toResponse(updatedParticipant);
 //    }
 
     @Transactional
     public void delete(Long id) {
-        Attendant attendant = findEntity(id);
-        repository.delete(attendant);
+        Participant participant = findEntity(id);
+        // Add one person to the event registration
+        Event event = participant.getEvent();
+        event.setRegistered(event.getRegistered() - 1);
+
+        repository.delete(participant);
     }
 
-    private Attendant findEntity(Long id) {
+    private Participant findEntity(Long id) {
         return repository.findById(id)
                 .orElseThrow(
-                        () -> new ResourceNotFoundException("Attendant not found")
+                        () -> new ResourceNotFoundException("Participant not found")
                 );
     }
 }
