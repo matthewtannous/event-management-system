@@ -39,4 +39,15 @@ public class EventController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    // Other
+    @GetMapping("/participating/{userId}")
+    public Iterable<EventResponse> findAllWithUserParticipating(@PathVariable Long userId) {
+        return service.findAllWithUserParticipating(userId);
+    }
+
+    @GetMapping("/organizing/{userId}")
+    public Iterable<EventResponse> findAllWithUserOrganizing(@PathVariable Long userId) {
+        return service.findAllWithUserOrganizing(userId);
+    }
 }

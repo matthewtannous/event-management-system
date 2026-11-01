@@ -1,3 +1,7 @@
+/**
+ * Organizer and Participant table do not need to be directly fetched from backend.
+ * We do not have to add them in ApiClient, since their data is used
+ */
 package com.mat.frontend.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,6 +19,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ApiClient {
@@ -45,12 +50,76 @@ public class ApiClient {
         });
     }
 
+    public static UserResponse createUser(String username, String email, String firstName, String lastName, String password) {
+        return post("/users", new UserRequest(username, email, firstName, lastName, password), UserResponse.class);
+    }
+
+    public static UserResponse updateUser(Long id, String username, String email, String firstName, String lastName, String password) {
+        return put("/users/" + id, new UserRequest(username, email, firstName, lastName, password), UserResponse.class);
+    }
+
     public static void deleteUser(Long id) {
         send(HttpRequest.newBuilder(URI.create(BASE_URL + "/users/" + id)).DELETE().build());
     }
 
 
+    /* Events */
+    public static List<EventResponse> getEvents() {
+        return get("/events", new TypeReference<List<EventResponse>>() {
+        });
+    }
 
+    public static EventResponse getEvent(Long id) {
+        return get("/events/" + id, new TypeReference<EventResponse>() {
+        });
+    }
+
+    public static EventResponse createEvent(String name, LocalDateTime fromTime, LocalDateTime toTime, Double ticketPrice, String location, Integer capacity, Integer registered) {
+        return post("/events", new EventRequest(name, fromTime, toTime, ticketPrice, location, capacity, registered), EventResponse.class);
+    }
+
+    public static EventResponse updateEvent(Long id, String name, LocalDateTime fromTime, LocalDateTime toTime, Double ticketPrice, String location, Integer capacity, Integer registered) {
+        return put("/events/" + id, new EventRequest(name, fromTime, toTime, ticketPrice, location, capacity, registered), EventResponse.class);
+    }
+
+    public static void deleteEvent(Long id) {
+        send(HttpRequest.newBuilder(URI.create(BASE_URL + "/events/" + id)).DELETE().build());
+    }
+
+    // Other for Events (get users)
+    public static List<EventResponse> getEventsWithUserParticipating(Long userId) {
+        return get("/events/participating/" + userId, new TypeReference<List<EventResponse>>() {
+        });
+    }
+
+    public static List<EventResponse> getEventsWithUserOrganizing(Long userId) {
+        return get("/events/organizing/" + userId, new TypeReference<List<EventResponse>>() {
+        });
+    }
+
+
+    /* Announcements */
+    public static List<AnnouncementResponse> getAnnouncements() {
+        return get("/announcements", new TypeReference<List<AnnouncementResponse>>() {
+        });
+    }
+
+    public static AnnouncementResponse getAnnouncement(Long id) {
+        return get("/announcements/" + id, new TypeReference<AnnouncementResponse>() {
+        });
+    }
+
+    public static AnnouncementResponse createAnnouncement(String message, boolean isPublic, Long userId, Long eventId) {
+        return post("/announcements", new AnnouncementRequest(message, isPublic, userId, eventId), AnnouncementResponse.class);
+    }
+
+    public static AnnouncementResponse updateAnnouncement(Long id, String message, boolean isPublic, Long userId, Long eventId) {
+        return put("/announcements/" + id, new AnnouncementRequest(message, isPublic, userId, eventId), AnnouncementResponse.class);
+    }
+
+    public static void deleteAnnouncement(Long id) {
+        send(HttpRequest.newBuilder(URI.create(BASE_URL + "/announcements/" + id)).DELETE().build());
+    }
 
     /* Generic Helpers */
 
@@ -67,12 +136,7 @@ public class ApiClient {
 
     private static <T> T post(String path, Object payload, Class<T> type) {
         try {
-            HttpRequest request = HttpRequest
-                    .newBuilder(URI.create(BASE_URL + path))
-                    .header("Content-Type", "application/json")
-                    .header("Accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload)))
-                    .build();
+            HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path)).header("Content-Type", "application/json").header("Accept", "application/json").POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
             String body = send(request);
             return mapper.readValue(body, type);
         } catch (IOException e) {
@@ -112,5 +176,15 @@ public class ApiClient {
         return "Server error with status code: " + status;
     }
 
+
+    private static <T> T put(String path, Object payload, Class<T> type) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path)).header("Content-Type", "application/json").header("Accept", "application/json").PUT(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
+            String body = send(request);
+            return mapper.readValue(body, type);
+        } catch (IOException e) {
+            throw new ApiException(0, "Could not read server response: " + e.getMessage());
+        }
+    }
 
 }

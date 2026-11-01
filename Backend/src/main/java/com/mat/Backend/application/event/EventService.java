@@ -2,6 +2,7 @@ package com.mat.Backend.application.event;
 
 import com.mat.Backend.application.exception.ConflictException;
 import com.mat.Backend.application.exception.ResourceNotFoundException;
+import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,17 @@ public class EventService {
     @Transactional
     public void delete(Long id) {
         repository.delete(findEntityById(id));
+    }
+
+    // Other
+    @Transactional
+    public List<EventResponse> findAllWithUserParticipating(Long userId) {
+        return repository.findEventsWithUserParticipating(userId).stream().map(mapper::toResponse).toList();
+    }
+
+    @Transactional
+    public List<EventResponse> findAllWithUserOrganizing(Long userId) {
+        return repository.findEventsWithUserOrganizing(userId).stream().map(mapper::toResponse).toList();
     }
 
     /**

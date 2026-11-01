@@ -55,10 +55,7 @@ public class LoginController {
             messageLabel.setText(task.getException().getMessage());
         });
 
-         task.run();
-//        Thread thread = new Thread(task);
-//        thread.setDaemon(true);
-//        thread.start();
+        task.run();
     }
 
     @FXML
