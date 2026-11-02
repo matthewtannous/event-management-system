@@ -25,6 +25,8 @@ public class EventService {
             throw new ConflictException("Start time cannot be after end time");
         }
 
+        checkEventConflict(event);
+
         repository.save(event);
         return mapper.toResponse(event);
     }
@@ -44,8 +46,13 @@ public class EventService {
         Event event = findEntityById(id);
         mapper.updateEntity(event, request);
 
-        Event updatedEvent = repository.save(event);
+        if (event.getFromTime().isAfter(event.getToTime())) {
+            throw new ConflictException("Start time cannot be after end time");
+        }
 
+        checkEventConflictExcludingId(event, id);
+
+        Event updatedEvent = repository.save(event);
         return mapper.toResponse(updatedEvent);
     }
 
@@ -71,5 +78,19 @@ public class EventService {
 
     private Event findEntityById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Event not found"));
+    }
+
+    // Check if the new event does not conflict with other events
+    private void checkEventConflict(Event event) {
+        if (repository.existsEventConflict(event.getLocation(), event.getFromTime(), event.getToTime())) {
+            throw new ConflictException("There is already an event scheduled at this location and time");
+        }
+    }
+
+    // Check if the new event does not conflict with other events excluding itself
+    private void checkEventConflictExcludingId(Event event, Long id) {
+        if (repository.existsEventConflictExcludingId(event.getLocation(), event.getFromTime(), event.getToTime(), id)) {
+            throw new ConflictException("There is already an event scheduled at this location and time");
+        }
     }
 }
