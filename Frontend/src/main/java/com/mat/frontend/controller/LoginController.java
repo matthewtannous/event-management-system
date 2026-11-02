@@ -51,7 +51,6 @@ public class LoginController {
         });
 
         task.setOnFailed(event -> {
-            System.out.println(task.getException().getMessage());
             messageLabel.setText(task.getException().getMessage());
         });
 
