@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mat.frontend.controller.OrganizingEventsController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <top>
+        <HBox alignment="CENTER" spacing="25">
+            <Button text="Home" onAction="#handleHome"/>
+            <Button text="Participating" onAction="#handleEventsParticipating"/>
+            <Button text="Organizing" onAction="#handleEventsOrganizing"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+
+    <center>
+        <Label fx:id="messageLabel"/>
+
+        <TableView fx:id="organizingEventsTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID"/>
+                <TableColumn fx:id="nameColumn" text="Event name"/>
+                <TableColumn fx:id="descriptionColumn" text="Event description"/>
+                <TableColumn fx:id="fromTimeColumn" text="Starts at"/>
+                <TableColumn fx:id="toTimeColumn" text="Ends at"/>
+                <TableColumn fx:id="ticketPriceColumn" text="Ticket price"/>
+                <TableColumn fx:id="locationColumn" text="Location"/>
+                <TableColumn fx:id="capacityColumn" text="Capacity"/>
+                <TableColumn fx:id="registeredColumn" text="Registered"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <Label fx:id="informationLabel"/>
+    </bottom>
+
+</BorderPane>

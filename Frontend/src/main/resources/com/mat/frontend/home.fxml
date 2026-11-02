@@ -12,6 +12,10 @@
 
     <top>
         <HBox alignment="CENTER" spacing="25">
+            <Button text="Home" onAction="#handleHome"/>
+            <Button text="All Events" onAction="#handleAllEvents"/>
+            <Button text="Participating" onAction="#handleEventsParticipating"/>
+            <Button text="Organizing" onAction="#handleEventsOrganizing"/>
             <Button text="Logout" onAction="#handleLogout"/>
         </HBox>
     </top>

@@ -89,6 +89,6 @@ public class RegistrationController {
             messageLabel.setText(task.getException().getMessage());
         });
 
-        task.run();
+        new Thread(task).start();
     }
 }

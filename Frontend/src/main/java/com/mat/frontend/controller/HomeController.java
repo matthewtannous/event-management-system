@@ -18,6 +18,8 @@ public class HomeController {
     public void initialize() {
         if (Session.getCurrentUser() != null) {
             messageLabel.setText("Hello," + Session.getCurrentUser().firstName() + " " + Session.getCurrentUser().lastName());
+        } else {
+            messageLabel.setText("What?!?!?!");
         }
     }
 
@@ -26,6 +28,42 @@ public class HomeController {
         Session.clear();
         try {
             SceneManager.switchScene("login.fxml");
+        } catch (IOException exception) {
+            informationLabel.setText("Error: " + exception.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleHome() {
+        try {
+            SceneManager.switchScene("home.fxml");
+        } catch (IOException exception) {
+            informationLabel.setText("Error: " + exception.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleAllEvents() {
+        try {
+            SceneManager.switchScene("all-events.fxml");
+        } catch (IOException exception) {
+            informationLabel.setText("Error: " + exception.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleEventsParticipating() {
+        try {
+            SceneManager.switchScene("participating-events.fxml");
+        } catch (IOException exception) {
+            informationLabel.setText("Error: " + exception.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleEventsOrganizing() {
+        try {
+            SceneManager.switchScene("organizing-events.fxml");
         } catch (IOException exception) {
             informationLabel.setText("Error: " + exception.getMessage());
         }

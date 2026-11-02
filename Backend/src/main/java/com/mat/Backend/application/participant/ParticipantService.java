@@ -39,7 +39,8 @@ public class ParticipantService {
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Event not found")
                 );
-        if (event.getCapacity() >= event.getRegistered()) {
+        System.out.println(event.getCapacity() + " , " + event.getRegistered());
+        if (event.getCapacity() <= event.getRegistered()) {
             throw new ConflictException("Event is full. You can't register");
         }
         // Add one person to the event registration

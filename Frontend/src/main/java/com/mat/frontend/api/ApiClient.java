@@ -74,12 +74,12 @@ public class ApiClient {
         });
     }
 
-    public static EventResponse createEvent(String name, LocalDateTime fromTime, LocalDateTime toTime, Double ticketPrice, String location, Integer capacity, Integer registered) {
-        return post("/events", new EventRequest(name, fromTime, toTime, ticketPrice, location, capacity, registered), EventResponse.class);
+    public static EventResponse createEvent(String name, String description, LocalDateTime fromTime, LocalDateTime toTime, Double ticketPrice, String location, Integer capacity, Integer registered) {
+        return post("/events", new EventRequest(name, description, fromTime, toTime, ticketPrice, location, capacity, registered), EventResponse.class);
     }
 
-    public static EventResponse updateEvent(Long id, String name, LocalDateTime fromTime, LocalDateTime toTime, Double ticketPrice, String location, Integer capacity, Integer registered) {
-        return put("/events/" + id, new EventRequest(name, fromTime, toTime, ticketPrice, location, capacity, registered), EventResponse.class);
+    public static EventResponse updateEvent(Long id, String name, String description, LocalDateTime fromTime, LocalDateTime toTime, Double ticketPrice, String location, Integer capacity, Integer registered) {
+        return put("/events/" + id, new EventRequest(name, description, fromTime, toTime, ticketPrice, location, capacity, registered), EventResponse.class);
     }
 
     public static void deleteEvent(Long id) {

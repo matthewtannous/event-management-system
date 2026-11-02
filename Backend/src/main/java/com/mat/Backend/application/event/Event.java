@@ -20,6 +20,8 @@ public class Event {
     @Column(nullable = false)
     String name;
 
+    String description;
+
     @Column(nullable = false)
     LocalDateTime fromTime;
 

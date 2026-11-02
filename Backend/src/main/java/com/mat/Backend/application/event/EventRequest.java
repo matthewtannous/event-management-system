@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 public record EventRequest(
         @NotBlank String name,
+        String description,
         @NotNull @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime fromTime,
         @NotNull @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime toTime,
         @NotNull @PositiveOrZero Double ticketPrice, @NotBlank String location, @NotNull Integer capacity,

@@ -7,6 +7,7 @@ public class EventMapper {
     public Event toEntity(EventRequest request) {
         Event event = new Event();
         event.setName(request.name());
+        event.setDescription(request.description());
         event.setFromTime(request.fromTime());
         event.setToTime(request.toTime());
         event.setTicketPrice(request.ticketPrice());
@@ -17,11 +18,12 @@ public class EventMapper {
     }
 
     public EventResponse toResponse(Event event) {
-        return new EventResponse(event.getId(), event.getName(), event.getFromTime(), event.getToTime(), event.getTicketPrice(), event.getLocation(), event.getCapacity(), event.getRegistered());
+        return new EventResponse(event.getId(), event.getName(), event.getDescription(), event.getFromTime(), event.getToTime(), event.getTicketPrice(), event.getLocation(), event.getCapacity(), event.getRegistered());
     }
 
     public void updateEntity(Event event, EventRequest request) {
         event.setName(request.name());
+        event.setDescription(request.description());
         event.setFromTime(request.fromTime());
         event.setToTime(request.toTime());
         event.setTicketPrice(request.ticketPrice());
