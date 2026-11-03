@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.sun.javafx.scene.control.DoubleField?>
+<?import com.sun.javafx.scene.control.IntegerField?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mat.frontend.controller.CreateEventController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <top>
+        <HBox alignment="CENTER" spacing="25">
+            <Button text="Home" onAction="#handleHome"/>
+            <Button text="Events" onAction="#handleEventsNavigator"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20.0">
+            <Label text="Event Creation Form"/>
+
+            <TextField fx:id="nameField"
+                       promptText="Enter name"
+                       maxWidth="250"/>
+
+            <TextField fx:id="descriptionField"
+                       promptText="Enter description"
+                       maxWidth="250"/>
+
+            <!-- Use DatePicker for date and TextField for hours/minutes -->
+            <DatePicker fx:id="fromDateField"
+                        promptText="Enter start date"
+                        maxWidth="250"/>
+
+            <TextField fx:id="fromTimeField"
+                       promptText="Enter start time (HH:mm)"
+                       maxWidth="250"/>
+
+
+            <DatePicker fx:id="toDateField"
+                        promptText="Enter end time"
+                        maxWidth="250"/>
+
+            <TextField fx:id="toTimeField"
+                       promptText="Enter end time (HH:mm)"
+                       maxWidth="250"/>
+
+
+            <TextField fx:id="ticketPriceField"
+                       promptText="Enter ticket price"
+                       maxWidth="250"/>
+
+            <TextField fx:id="locationField"
+                       promptText="Enter location"
+                       maxWidth="250"/>
+
+            <TextField fx:id="capacityField"
+                       promptText="Enter capacity"
+                       maxWidth="250"/>
+
+            <!--    No registered field, starts with zero always -->
+        </VBox>
+    </center>
+
+    <Label
+            fx:id="messageLabel"
+            wrapText="true"/>
+</BorderPane>

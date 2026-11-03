@@ -118,18 +118,9 @@ public class OrganizingEventsController {
     }
 
     @FXML
-    private void handleEventsParticipating() {
+    private void handleEventsNavigator() {
         try {
-            SceneManager.switchScene("participating-events.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsOrganizing() {
-        try {
-            SceneManager.switchScene("organizing-events.fxml");
+            SceneManager.switchScene("events-navigator.fxml");
         } catch (IOException exception) {
             informationLabel.setText("Error: " + exception.getMessage());
         }

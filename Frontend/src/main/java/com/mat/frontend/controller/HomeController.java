@@ -43,27 +43,9 @@ public class HomeController {
     }
 
     @FXML
-    private void handleAllEvents() {
+    private void handleEventsNavigator() {
         try {
-            SceneManager.switchScene("all-events.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsParticipating() {
-        try {
-            SceneManager.switchScene("participating-events.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsOrganizing() {
-        try {
-            SceneManager.switchScene("organizing-events.fxml");
+            SceneManager.switchScene("events-navigator.fxml");
         } catch (IOException exception) {
             informationLabel.setText("Error: " + exception.getMessage());
         }

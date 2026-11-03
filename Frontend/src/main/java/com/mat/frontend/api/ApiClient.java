@@ -121,6 +121,52 @@ public class ApiClient {
         send(HttpRequest.newBuilder(URI.create(BASE_URL + "/announcements/" + id)).DELETE().build());
     }
 
+    /* Organizers */
+    public static List<OrganizerResponse> getOrganizers() {
+        return get("/organizers", new TypeReference<List<OrganizerResponse>>() {
+        });
+    }
+
+    public static OrganizerResponse getOrganizer(Long id) {
+        return get("/organizers/" + id, new TypeReference<OrganizerResponse>() {
+        });
+    }
+
+    public static OrganizerResponse createOrganizer(Long userId, Long eventId) {
+        return post("/organizers", new OrganizerRequest(userId, eventId), OrganizerResponse.class);
+    }
+
+    public static OrganizerResponse updateOrganizer(Long id, Long userId, Long eventId) {
+        return put("/organizers/" + id, new OrganizerRequest(userId, eventId), OrganizerResponse.class);
+    }
+
+    public static void deleteOrganizer(Long id) {
+        send(HttpRequest.newBuilder(URI.create(BASE_URL + "/organizers/" + id)).DELETE().build());
+    }
+
+    /* Participants */
+    public static List<ParticipantResponse> getParticipants() {
+        return get("/Participants", new TypeReference<List<ParticipantResponse>>() {
+        });
+    }
+
+    public static ParticipantResponse getParticipant(Long id) {
+        return get("/Participants/" + id, new TypeReference<ParticipantResponse>() {
+        });
+    }
+
+    public static ParticipantResponse createParticipant(Long userId, Long eventId) {
+        return post("/Participants", new ParticipantRequest(userId, eventId), ParticipantResponse.class);
+    }
+
+    public static ParticipantResponse updateParticipant(Long id, Long userId, Long eventId) {
+        return put("/Participants/" + id, new ParticipantRequest(userId, eventId), ParticipantResponse.class);
+    }
+
+    public static void deleteParticipant(Long id) {
+        send(HttpRequest.newBuilder(URI.create(BASE_URL + "/Participants/" + id)).DELETE().build());
+    }
+
     /* Generic Helpers */
 
     private static <T> T get(String path, TypeReference<T> typeReference) {
