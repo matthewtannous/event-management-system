@@ -146,25 +146,25 @@ public class ApiClient {
 
     /* Participants */
     public static List<ParticipantResponse> getParticipants() {
-        return get("/Participants", new TypeReference<List<ParticipantResponse>>() {
+        return get("/participants", new TypeReference<List<ParticipantResponse>>() {
         });
     }
 
     public static ParticipantResponse getParticipant(Long id) {
-        return get("/Participants/" + id, new TypeReference<ParticipantResponse>() {
+        return get("/participants/" + id, new TypeReference<ParticipantResponse>() {
         });
     }
 
     public static ParticipantResponse createParticipant(Long userId, Long eventId) {
-        return post("/Participants", new ParticipantRequest(userId, eventId), ParticipantResponse.class);
+        return post("/participants", new ParticipantRequest(userId, eventId), ParticipantResponse.class);
     }
 
     public static ParticipantResponse updateParticipant(Long id, Long userId, Long eventId) {
-        return put("/Participants/" + id, new ParticipantRequest(userId, eventId), ParticipantResponse.class);
+        return put("/participants/" + id, new ParticipantRequest(userId, eventId), ParticipantResponse.class);
     }
 
     public static void deleteParticipant(Long id) {
-        send(HttpRequest.newBuilder(URI.create(BASE_URL + "/Participants/" + id)).DELETE().build());
+        send(HttpRequest.newBuilder(URI.create(BASE_URL + "/participants/" + id)).DELETE().build());
     }
 
     /* Generic Helpers */

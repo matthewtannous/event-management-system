@@ -1,4 +1,4 @@
-package com.mat.frontend.api;
+package com.mat.frontend.session;
 
 import com.mat.frontend.api.dto.LoginResponse;
 

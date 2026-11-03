@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mat.frontend.controller.EventDetailedController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <top>
+        <HBox alignment="CENTER" spacing="25">
+            <Button text="Home" onAction="#handleHome"/>
+            <Button text="Events" onAction="#handleEventsNavigator"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="25">
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Name: "/>
+                <Label fx:id="nameField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Description: "/>
+                <Label fx:id="descriptionField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Starts at: "/>
+                <Label fx:id="fromTimeField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Ends at: "/>
+                <Label fx:id="toTimeField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Ticket price: "/>
+                <Label fx:id="ticketPriceField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Location: "/>
+                <Label fx:id="locationField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Capacity: "/>
+                <Label fx:id="capacityField"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="Registered: "/>
+                <Label fx:id="registeredField"/>
+            </HBox>
+
+            <Button text="Register" onAction="#handleRegisterForEvent"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <Label alignment="CENTER" fx:id="informationLabel"/>
+    </bottom>
+
+
+</BorderPane>

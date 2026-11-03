@@ -23,7 +23,7 @@
 
         <TableView fx:id="organizingEventsTable">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID"/>
+<!--                <TableColumn fx:id="idColumn" text="ID"/>-->
                 <TableColumn fx:id="nameColumn" text="Event name"/>
                 <TableColumn fx:id="descriptionColumn" text="Event description"/>
                 <TableColumn fx:id="fromTimeColumn" text="Starts at"/>

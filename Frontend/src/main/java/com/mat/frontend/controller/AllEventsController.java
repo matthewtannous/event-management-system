@@ -2,14 +2,13 @@ package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
-import com.mat.frontend.api.Session;
+import com.mat.frontend.session.SceneData;
+import com.mat.frontend.session.Session;
 import com.mat.frontend.api.dto.EventResponse;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -26,14 +25,14 @@ public class AllEventsController {
     @FXML
     private TableView<EventResponse> allEventsTable;
 
-    @FXML
-    private TableColumn<EventResponse, Long> idColumn;
+//    @FXML
+//    private TableColumn<EventResponse, Long> idColumn;
 
     @FXML
     private TableColumn<EventResponse, String> nameColumn;
 
-    @FXML
-    private TableColumn<EventResponse, String> descriptionColumn;
+//    @FXML
+//    private TableColumn<EventResponse, String> descriptionColumn;
 
     @FXML
     private TableColumn<EventResponse, LocalDateTime> fromTimeColumn;
@@ -41,8 +40,8 @@ public class AllEventsController {
     @FXML
     private TableColumn<EventResponse, LocalDateTime> toTimeColumn;
 
-    @FXML
-    private TableColumn<EventResponse, Double> ticketPriceColumn;
+//    @FXML
+//    private TableColumn<EventResponse, Double> ticketPriceColumn;
 
     @FXML
     private TableColumn<EventResponse, String> locationColumn;
@@ -54,21 +53,52 @@ public class AllEventsController {
     private TableColumn<EventResponse, Integer> registeredColumn;
 
     @FXML
+    private TableColumn<EventResponse, Void> actionColumn;
+
+    @FXML
     public void initialize() {
         if (Session.getCurrentUser() != null) {
             messageLabel.setText("All events:");
 
             // data binding
-            idColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().id()));
+//            idColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().id()));
             nameColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().name()));
-            descriptionColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().description()));
+//            descriptionColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().description()));
             fromTimeColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().fromTime()));
             toTimeColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().toTime()));
-            ticketPriceColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().ticketPrice()));
+//            ticketPriceColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().ticketPrice()));
             locationColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().location()));
             capacityColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().capacity()));
             registeredColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().registered()));
 
+            // Button (not sure how it works)
+            actionColumn.setCellFactory(c -> new TableCell<EventResponse, Void>() {
+                private final Button button = new Button("View");
+
+                {
+                    button.setOnAction(event -> {
+                        EventResponse selectedEvent = (EventResponse) getTableView().getItems().get(getIndex());
+
+                        SceneData.setSceneData(selectedEvent.id(), selectedEvent);
+                        try {
+                            SceneManager.switchScene("event-detailed.fxml");
+                        } catch (IOException exception) {
+                            informationLabel.setText("Error: " + exception.getMessage());
+                        }
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(button);
+                    }
+                }
+            });
             loadEvents();
         } else {
             messageLabel.setText("What?!?!?!");

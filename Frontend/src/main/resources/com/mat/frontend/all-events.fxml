@@ -23,15 +23,18 @@
 
         <TableView fx:id="allEventsTable">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID"/>
+<!--                <TableColumn fx:id="idColumn" text="ID"/>-->
                 <TableColumn fx:id="nameColumn" text="Event name"/>
-                <TableColumn fx:id="descriptionColumn" text="Event description"/>
+<!--                <TableColumn fx:id="descriptionColumn" text="Event description"/>-->
                 <TableColumn fx:id="fromTimeColumn" text="Starts at"/>
                 <TableColumn fx:id="toTimeColumn" text="Ends at"/>
-                <TableColumn fx:id="ticketPriceColumn" text="Ticket price"/>
+<!--                <TableColumn fx:id="ticketPriceColumn" text="Ticket price"/>-->
                 <TableColumn fx:id="locationColumn" text="Location"/>
                 <TableColumn fx:id="capacityColumn" text="Capacity"/>
                 <TableColumn fx:id="registeredColumn" text="Registered"/>
+
+                <!-- Button -->
+                <TableColumn fx:id="actionColumn" text="View"/>
             </columns>
         </TableView>
     </center>

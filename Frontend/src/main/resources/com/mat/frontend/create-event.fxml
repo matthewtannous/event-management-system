@@ -3,8 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.sun.javafx.scene.control.DoubleField?>
-<?import com.sun.javafx.scene.control.IntegerField?>
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.mat.frontend.controller.CreateEventController">

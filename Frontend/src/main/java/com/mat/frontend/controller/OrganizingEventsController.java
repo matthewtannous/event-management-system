@@ -2,7 +2,7 @@ package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
-import com.mat.frontend.api.Session;
+import com.mat.frontend.session.Session;
 import com.mat.frontend.api.dto.EventResponse;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
@@ -26,8 +26,8 @@ public class OrganizingEventsController {
     @FXML
     private TableView<EventResponse> organizingEventsTable;
 
-    @FXML
-    private TableColumn<EventResponse, Long> idColumn;
+//    @FXML
+//    private TableColumn<EventResponse, Long> idColumn;
 
     @FXML
     private TableColumn<EventResponse, String> nameColumn;
@@ -60,7 +60,7 @@ public class OrganizingEventsController {
             messageLabel.setText("Events you are organizing:");
 
             // data binding
-            idColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().id()));
+//            idColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().id()));
             nameColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().name()));
             descriptionColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().description()));
             fromTimeColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().fromTime()));

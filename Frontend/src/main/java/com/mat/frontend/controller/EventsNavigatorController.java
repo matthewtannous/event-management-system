@@ -1,7 +1,7 @@
 package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
-import com.mat.frontend.api.Session;
+import com.mat.frontend.session.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
