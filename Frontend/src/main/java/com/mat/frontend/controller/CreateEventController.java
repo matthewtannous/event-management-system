@@ -79,11 +79,11 @@ public class CreateEventController {
         String description = descriptionField.getText();
         LocalDateTime fromTime = getFromTime();
         LocalDateTime toTime = getToTime();
-        Double ticketPrice = Double.parseDouble(ticketPriceField.getText());
+        String ticketPrice = ticketPriceField.getText();
         String location = locationField.getText();
-        Integer capacity = Integer.parseInt(capacityField.getText());
+        String capacity = capacityField.getText();
 
-        if (name.isEmpty() || ticketPrice == 0 || location.isEmpty() || capacity == 0) {
+        if (name.isEmpty() || fromTime == null || toTime == null || ticketPrice.isEmpty() || location.isEmpty() || capacity.isEmpty()) {
             messageLabel.setText("Please fill all the fields");
             return;
         }
@@ -91,7 +91,7 @@ public class CreateEventController {
         Task<EventResponse> task = new Task<EventResponse>() {
             @Override
             protected EventResponse call() throws Exception {
-                return ApiClient.createEvent(name, description, fromTime, toTime, ticketPrice, location, capacity, 0);
+                return ApiClient.createEvent(name, description, fromTime, toTime, Double.parseDouble(ticketPrice), location, Integer.parseInt(capacity), 0);
             }
         };
 
@@ -116,17 +116,22 @@ public class CreateEventController {
      */
 
     private LocalDateTime getFromTime() {
+        if (fromDateField.getValue() == null || fromTimeField.getText() == null) {
+            return null;
+        }
         LocalDate date = fromDateField.getValue();
         LocalTime time = LocalTime.parse(fromTimeField.getText());
         return LocalDateTime.of(date, time);
     }
 
     private LocalDateTime getToTime() {
+        if (toDateField.getValue() == null || toTimeField.getText() == null) {
+            return null;
+        }
         LocalDate date = toDateField.getValue();
         LocalTime time = LocalTime.parse(toTimeField.getText());
         return LocalDateTime.of(date, time);
     }
-
 
     @FXML
     private void handleLogout() {

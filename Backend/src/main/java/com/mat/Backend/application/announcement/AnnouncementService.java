@@ -2,12 +2,9 @@ package com.mat.Backend.application.announcement;
 
 import com.mat.Backend.application.event.Event;
 import com.mat.Backend.application.event.EventRepository;
-import com.mat.Backend.application.event.EventService;
-import com.mat.Backend.application.exception.ConflictException;
 import com.mat.Backend.application.exception.ResourceNotFoundException;
 import com.mat.Backend.application.user.User;
 import com.mat.Backend.application.user.UserRepository;
-import com.mat.Backend.application.user.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

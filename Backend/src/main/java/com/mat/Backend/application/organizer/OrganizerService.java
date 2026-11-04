@@ -2,11 +2,9 @@ package com.mat.Backend.application.organizer;
 
 import com.mat.Backend.application.event.Event;
 import com.mat.Backend.application.event.EventRepository;
-import com.mat.Backend.application.event.EventService;
 import com.mat.Backend.application.exception.ResourceNotFoundException;
 import com.mat.Backend.application.user.User;
 import com.mat.Backend.application.user.UserRepository;
-import com.mat.Backend.application.user.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -28,27 +26,15 @@ public class OrganizerService {
 
     @Transactional
     public OrganizerResponse create(OrganizerRequest request) {
-        User user = userRepository
-                .findById(request.userId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("User not found")
-                );
-        Event event = eventRepository
-                .findById(request.eventId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("User not found")
-                );
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Event event = eventRepository.findById(request.eventId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Organizer organizer = mapper.toEntity(request, user, event);
         return mapper.toResponse(repository.save(organizer));
     }
 
     @Transactional
     public List<OrganizerResponse> findAll() {
-        return repository
-                .findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
+        return repository.findAll().stream().map(mapper::toResponse).toList();
     }
 
     @Transactional
@@ -87,9 +73,11 @@ public class OrganizerService {
     }
 
     private Organizer findEntity(Long id) {
-        return repository.findById(id)
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Organizer not found")
-                );
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Organizer not found"));
+    }
+
+    // Check if a user participates in an event
+    boolean userParticipatesInEvent(Long userId, Long eventId) {
+        return repository.existsByUserIdAndEventId(userId, eventId);
     }
 }

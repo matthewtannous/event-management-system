@@ -60,7 +60,7 @@
                 <Label fx:id="registeredField"/>
             </HBox>
 
-            <Button text="Register" onAction="#handleRegisterForEvent"/>
+            <Button text="Register" onAction="#handleRegisterForEvent" fx:id="registrationButton"/>
 
             <Label alignment="CENTER" fx:id="informationLabel"/>
         </VBox>

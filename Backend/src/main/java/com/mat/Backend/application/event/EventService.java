@@ -2,7 +2,6 @@ package com.mat.Backend.application.event;
 
 import com.mat.Backend.application.exception.ConflictException;
 import com.mat.Backend.application.exception.ResourceNotFoundException;
-import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,6 @@
 package com.mat.Backend.application.auth;
 
-import com.mat.Backend.application.user.UserService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

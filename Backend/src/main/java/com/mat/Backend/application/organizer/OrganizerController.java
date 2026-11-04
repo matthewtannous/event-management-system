@@ -41,4 +41,10 @@ public class OrganizerController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    // Other
+    @GetMapping("/user-in-event")
+    public boolean userInEvent(@RequestParam("userId") Long userId, @RequestParam("eventId") Long eventId) {
+        return service.userParticipatesInEvent(userId, eventId);
+    }
 }

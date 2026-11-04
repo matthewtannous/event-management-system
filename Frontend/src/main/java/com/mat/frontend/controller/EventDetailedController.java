@@ -8,6 +8,7 @@ import com.mat.frontend.session.SceneData;
 import com.mat.frontend.session.Session;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -41,6 +42,9 @@ public class EventDetailedController {
     private Label registeredField;
 
     @FXML
+    private Button registrationButton;
+
+    @FXML
     public void initialize() {
         if (!(SceneData.getData() instanceof EventResponse)) {
             informationLabel.setText("An error occurred");
@@ -56,6 +60,16 @@ public class EventDetailedController {
         locationField.setText(String.valueOf(event.location()));
         capacityField.setText(String.valueOf(event.capacity()));
         registeredField.setText(String.valueOf(event.registered()));
+
+        boolean participates = ApiClient.userParticipatesInEvent(Session.getCurrentUser().id(), event.id());
+        boolean organizes = ApiClient.userOrganizesEvent(Session.getCurrentUser().id(), event.id());
+        if (participates) {
+            registrationButton.setDisable(true);
+            informationLabel.setText("You are participating in this event!");
+        } else if (organizes) {
+            registrationButton.setDisable(true);
+            informationLabel.setText("You are organizing this event!");
+        }
     }
 
     @FXML

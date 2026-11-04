@@ -144,6 +144,11 @@ public class ApiClient {
         send(HttpRequest.newBuilder(URI.create(BASE_URL + "/organizers/" + id)).DELETE().build());
     }
 
+    public static boolean userOrganizesEvent(Long userId, Long eventId) {
+        return get("/organizers/user-in-event?userId=" + userId + "&eventId=" + eventId, new TypeReference<Boolean>() {
+        });
+    }
+
     /* Participants */
     public static List<ParticipantResponse> getParticipants() {
         return get("/participants", new TypeReference<List<ParticipantResponse>>() {
@@ -165,6 +170,11 @@ public class ApiClient {
 
     public static void deleteParticipant(Long id) {
         send(HttpRequest.newBuilder(URI.create(BASE_URL + "/participants/" + id)).DELETE().build());
+    }
+
+    public static boolean userParticipatesInEvent(Long userId, Long eventId) {
+        return get("/participants/user-in-event?userId=" + userId + "&eventId=" + eventId, new TypeReference<Boolean>() {
+        });
     }
 
     /* Generic Helpers */
