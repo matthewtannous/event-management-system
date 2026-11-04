@@ -86,4 +86,14 @@ public class AnnouncementService {
                         () -> new ResourceNotFoundException("Announcement not found")
                 );
     }
+
+    // Find all announcements for an event
+    List<AnnouncementResponse> findAllByEventId(Long eventId, Boolean onlyPublic) {
+        if (onlyPublic) {
+            // Only return public announcements for event
+            return repository.findByEventIdAndIsPublicOrderByCreatedAtDesc(eventId, true).stream().map(mapper::toResponse).toList();
+        }
+        // Return all announcements for event
+        return repository.findByEventIdOrderByCreatedAtDesc(eventId).stream().map(mapper::toResponse).toList();
+    }
 }

@@ -42,4 +42,9 @@ public class AnnouncementController {
         service.delete(id);
     }
 
+    // Return announcements by event
+    @GetMapping("/event/{id}")
+    public List<AnnouncementResponse> getByEventId(@PathVariable Long id, @RequestParam("onlyPublic") boolean onlyPublic) {
+        return service.findAllByEventId(id, onlyPublic);
+    }
 }
