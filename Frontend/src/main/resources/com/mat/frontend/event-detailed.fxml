@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.mat.frontend.controller.EventDetailedController">
     <padding>
@@ -60,7 +59,8 @@
                 <Label fx:id="registeredField"/>
             </HBox>
 
-            <Button text="Register" onAction="#handleRegisterForEvent" fx:id="registrationButton"/>
+            <!-- <Button text="Register" onAction="#handleRegisterForEvent" fx:id="registrationButton"/> -->
+            <Button fx:id="actionButton"/>
 
             <Label alignment="CENTER" fx:id="informationLabel"/>
         </VBox>

@@ -2,8 +2,8 @@ package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
-import com.mat.frontend.session.Session;
 import com.mat.frontend.api.dto.EventResponse;
+import com.mat.frontend.session.Session;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -32,8 +32,8 @@ public class ParticipatingEventsController {
     @FXML
     private TableColumn<EventResponse, String> nameColumn;
 
-    @FXML
-    private TableColumn<EventResponse, String> descriptionColumn;
+//    @FXML
+//    private TableColumn<EventResponse, String> descriptionColumn;
 
     @FXML
     private TableColumn<EventResponse, LocalDateTime> fromTimeColumn;
@@ -41,17 +41,17 @@ public class ParticipatingEventsController {
     @FXML
     private TableColumn<EventResponse, LocalDateTime> toTimeColumn;
 
-    @FXML
-    private TableColumn<EventResponse, Double> ticketPriceColumn;
-
+//    @FXML
+//    private TableColumn<EventResponse, Double> ticketPriceColumn;
+//
     @FXML
     private TableColumn<EventResponse, String> locationColumn;
-
-    @FXML
-    private TableColumn<EventResponse, Integer> capacityColumn;
-
-    @FXML
-    private TableColumn<EventResponse, Integer> registeredColumn;
+//
+//    @FXML
+//    private TableColumn<EventResponse, Integer> capacityColumn;
+//
+//    @FXML
+//    private TableColumn<EventResponse, Integer> registeredColumn;
 
 
     @FXML
@@ -62,13 +62,13 @@ public class ParticipatingEventsController {
             // data binding
 //            idColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().id()));
             nameColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().name()));
-            descriptionColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().description()));
+//            descriptionColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().description()));
             fromTimeColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().fromTime()));
             toTimeColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().toTime()));
-            ticketPriceColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().ticketPrice()));
+//            ticketPriceColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().ticketPrice()));
             locationColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().location()));
-            capacityColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().capacity()));
-            registeredColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().registered()));
+//            capacityColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().capacity()));
+//            registeredColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().registered()));
 
             loadEvents();
         } else {

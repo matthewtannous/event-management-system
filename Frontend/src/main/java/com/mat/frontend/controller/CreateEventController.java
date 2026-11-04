@@ -2,11 +2,14 @@ package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
-import com.mat.frontend.session.Session;
 import com.mat.frontend.api.dto.EventResponse;
+import com.mat.frontend.session.Session;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -55,11 +58,6 @@ public class CreateEventController {
     }
 
     @FXML
-    private void handleLogin() throws IOException {
-        SceneManager.switchScene("login.fxml");
-    }
-
-    @FXML
     private void handleClear() {
         nameField.clear();
         descriptionField.clear();
@@ -74,7 +72,7 @@ public class CreateEventController {
     }
 
     @FXML
-    private void handleRegisterEvent() throws IOException {
+    private void handleCreateEvent() throws IOException {
         String name = nameField.getText();
         String description = descriptionField.getText();
         LocalDateTime fromTime = getFromTime();

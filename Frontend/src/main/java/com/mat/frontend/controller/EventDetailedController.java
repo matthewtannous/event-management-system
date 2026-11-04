@@ -41,8 +41,11 @@ public class EventDetailedController {
     @FXML
     private Label registeredField;
 
+//    @FXML
+//    private Button registrationButton;
+
     @FXML
-    private Button registrationButton;
+    private Button actionButton;
 
     @FXML
     public void initialize() {
@@ -63,12 +66,20 @@ public class EventDetailedController {
 
         boolean participates = ApiClient.userParticipatesInEvent(Session.getCurrentUser().id(), event.id());
         boolean organizes = ApiClient.userOrganizesEvent(Session.getCurrentUser().id(), event.id());
+
         if (participates) {
-            registrationButton.setDisable(true);
+            actionButton.setDisable(true);
+            actionButton.setText("Register");
             informationLabel.setText("You are participating in this event!");
         } else if (organizes) {
-            registrationButton.setDisable(true);
+//            registrationButton.setDisable(true);
+
+            actionButton.setOnAction(e -> handleAnnouncementCreation());
+            actionButton.setText("Create announcement");
             informationLabel.setText("You are organizing this event!");
+        } else {
+            actionButton.setOnAction(e -> handleRegisterForEvent());
+            actionButton.setText("Register");
         }
     }
 
@@ -93,6 +104,15 @@ public class EventDetailedController {
         });
 
         new Thread(task).start();
+    }
+
+    @FXML
+    public void handleAnnouncementCreation() {
+        try {
+            SceneManager.switchScene("create-announcement.fxml");
+        } catch (IOException exception) {
+            informationLabel.setText("Error: " + exception.getMessage());
+        }
     }
 
     @FXML
