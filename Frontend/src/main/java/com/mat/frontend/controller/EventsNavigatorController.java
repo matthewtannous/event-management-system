@@ -1,6 +1,7 @@
 package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
+import com.mat.frontend.session.SceneData;
 import com.mat.frontend.session.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,19 +10,14 @@ import java.io.IOException;
 
 public class EventsNavigatorController {
     @FXML
-    private Label messageLabel;
-
-    @FXML
     private Label informationLabel;
 
-//    @FXML
-//    public void initialize() {
-//        if (Session.getCurrentUser() != null) {
-//            messageLabel.setText("Hello," + Session.getCurrentUser().firstName() + " " + Session.getCurrentUser().lastName());
-//        } else {
-//            messageLabel.setText("What?!?!?!");
-//        }
-//    }
+    @FXML
+    public void initialize() {
+        if (SceneData.getData() instanceof String) {
+            informationLabel.setText((String) SceneData.getData());
+        }
+    }
 
     @FXML
     private void handleLogout() {

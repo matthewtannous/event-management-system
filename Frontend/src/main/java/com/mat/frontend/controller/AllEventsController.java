@@ -79,7 +79,7 @@ public class AllEventsController {
                     button.setOnAction(event -> {
                         EventResponse selectedEvent = (EventResponse) getTableView().getItems().get(getIndex());
 
-                        SceneData.setSceneData(selectedEvent.id(), selectedEvent);
+                        SceneData.setSceneData(selectedEvent);
                         try {
                             SceneManager.switchScene("event-detailed.fxml");
                         } catch (IOException exception) {

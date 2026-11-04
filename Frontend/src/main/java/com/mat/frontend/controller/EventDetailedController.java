@@ -63,11 +63,15 @@ public class EventDetailedController {
         Task<ParticipantResponse> task = new Task<ParticipantResponse>() {
             @Override
             protected ParticipantResponse call() throws Exception {
-                return ApiClient.createParticipant(Session.getCurrentUser().id(), SceneData.getId());
+                return ApiClient.createParticipant(Session.getCurrentUser().id(), ((EventResponse) SceneData.getData()).id());
             }
         };
         task.setOnSucceeded(event -> {
-            informationLabel.setText("Registration successful!");
+            SceneData.setSceneData("You have register for the event: " + ((EventResponse) SceneData.getData()).name());
+            // informationLabel.setText("Registration successful!");
+
+            // Go back
+            handleEventsNavigator();
         });
 
         task.setOnFailed(event -> {

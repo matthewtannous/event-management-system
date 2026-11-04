@@ -61,11 +61,13 @@
                        promptText="Enter capacity"
                        maxWidth="250"/>
 
-            <!--    No registered field, starts with zero always -->
+            <!--    No "registered" field, starts with zero always -->
+
+            <Button text="Create Event" onAction="#handleRegisterEvent"/>
+
+            <Label
+                    fx:id="messageLabel"
+                    wrapText="true"/>
         </VBox>
     </center>
-
-    <Label
-            fx:id="messageLabel"
-            wrapText="true"/>
 </BorderPane>

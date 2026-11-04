@@ -16,7 +16,7 @@ public class SceneManager {
     public static void switchScene(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxml));
 
-        Scene scene = new Scene(loader.load(), 800, 500); // width and height as parameters?
+        Scene scene = new Scene(loader.load(), 1000, 800); // width and height as parameters?
         stage.setScene(scene);
     }
 }

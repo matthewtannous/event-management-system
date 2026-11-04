@@ -24,12 +24,8 @@
             <Button text="All events" onAction="#handleAllEvents"/>
 
             <Button text="Create event" onAction="#handleCreateEvent"/>
+
+            <Label fx:id="informationLabel"/>
         </VBox>
     </center>
-
-    <bottom>
-        <Label fx:id="informationLabel"/>
-    </bottom>
-
-
 </BorderPane>

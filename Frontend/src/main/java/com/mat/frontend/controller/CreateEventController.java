@@ -74,7 +74,7 @@ public class CreateEventController {
     }
 
     @FXML
-    private void handleRegister() throws IOException {
+    private void handleRegisterEvent() throws IOException {
         String name = nameField.getText();
         String description = descriptionField.getText();
         LocalDateTime fromTime = getFromTime();
