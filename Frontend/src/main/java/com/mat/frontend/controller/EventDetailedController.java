@@ -2,6 +2,7 @@ package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
+import com.mat.frontend.api.dto.AnnouncementResponse;
 import com.mat.frontend.api.dto.EventResponse;
 import com.mat.frontend.api.dto.ParticipantResponse;
 import com.mat.frontend.session.SceneData;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.util.List;
 
 public class EventDetailedController {
     @FXML
@@ -45,6 +47,12 @@ public class EventDetailedController {
 //    private Button registrationButton;
 
     @FXML
+    private Label announcerLabel;
+
+    @FXML
+    private Label announcementLabel;
+
+    @FXML
     private Button actionButton;
 
     @FXML
@@ -68,15 +76,16 @@ public class EventDetailedController {
         boolean organizes = ApiClient.userOrganizesEvent(Session.getCurrentUser().id(), event.id());
 
         if (participates) {
-            actionButton.setDisable(true);
             actionButton.setText("Register");
+            actionButton.setDisable(true);
             informationLabel.setText("You are participating in this event!");
-        } else if (organizes) {
-//            registrationButton.setDisable(true);
+            fillAnnouncements(event.id(), true); // get public announcements
 
+        } else if (organizes) {
             actionButton.setOnAction(e -> handleAnnouncementCreation());
             actionButton.setText("Create announcement");
             informationLabel.setText("You are organizing this event!");
+            fillAnnouncements(event.id(), false); // get public and private announcements
         } else {
             actionButton.setOnAction(e -> handleRegisterForEvent());
             actionButton.setText("Register");
@@ -104,6 +113,15 @@ public class EventDetailedController {
         });
 
         new Thread(task).start();
+    }
+
+    @FXML
+    public void fillAnnouncements(Long eventId, boolean onlyPublic) {
+        List<AnnouncementResponse> announcements = ApiClient.getAnnouncementsForEvent(eventId, onlyPublic);
+        if (!announcements.isEmpty()) {
+            announcerLabel.setText(announcements.get(0).userId().toString());
+            announcementLabel.setText(ApiClient.getUser(announcements.get(0).userId()).username());
+        }
     }
 
     @FXML

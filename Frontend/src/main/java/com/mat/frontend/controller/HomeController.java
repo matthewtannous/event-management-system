@@ -16,6 +16,9 @@ public class HomeController {
     private Label informationLabel;
 
     @FXML
+    private Label idLabel;
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
@@ -36,6 +39,7 @@ public class HomeController {
 
         LoginResponse user = Session.getCurrentUser();
         messageLabel.setText("Hello," + user.username());
+        idLabel.setText(user.id().toString());
         usernameLabel.setText(user.username());
         firstNameLabel.setText(user.firstName());
         lastNameLabel.setText(user.lastName());
