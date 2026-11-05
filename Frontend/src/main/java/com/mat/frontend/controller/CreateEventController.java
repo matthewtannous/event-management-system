@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class CreateEventController {
+public class CreateEventController extends BaseController{
     @FXML
     private TextField nameField;
 
@@ -131,33 +131,5 @@ public class CreateEventController {
         LocalDate date = toDateField.getValue();
         LocalTime time = LocalTime.parse(toTimeField.getText());
         return LocalDateTime.of(date, time);
-    }
-
-    @FXML
-    private void handleLogout() {
-        Session.clear();
-        try {
-            SceneManager.switchScene("login.fxml");
-        } catch (IOException exception) {
-            messageLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleHome() {
-        try {
-            SceneManager.switchScene("home.fxml");
-        } catch (IOException exception) {
-            messageLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsNavigator() {
-        try {
-            SceneManager.switchScene("events-navigator.fxml");
-        } catch (IOException exception) {
-            messageLabel.setText("Error: " + exception.getMessage());
-        }
     }
 }

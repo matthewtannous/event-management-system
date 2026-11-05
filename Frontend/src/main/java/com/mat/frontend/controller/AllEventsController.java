@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class AllEventsController {
+public class AllEventsController extends BaseController {
     @FXML
     private Label messageLabel;
 
@@ -130,33 +130,5 @@ public class AllEventsController {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
-    }
-
-    @FXML
-    private void handleLogout() {
-        Session.clear();
-        try {
-            SceneManager.switchScene("login.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleHome() {
-        try {
-            SceneManager.switchScene("home.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsNavigator() {
-        try {
-            SceneManager.switchScene("events-navigator.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
     }
 }

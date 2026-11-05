@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
-public class EventDetailedController {
+public class EventDetailedController extends BaseController{
     @FXML
     private Label informationLabel;
 
@@ -162,34 +162,6 @@ public class EventDetailedController {
     public void handleAnnouncementCreation() {
         try {
             SceneManager.switchScene("create-announcement.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleLogout() {
-        Session.clear();
-        try {
-            SceneManager.switchScene("login.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleHome() {
-        try {
-            SceneManager.switchScene("home.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsNavigator() {
-        try {
-            SceneManager.switchScene("events-navigator.fxml");
         } catch (IOException exception) {
             informationLabel.setText("Error: " + exception.getMessage());
         }

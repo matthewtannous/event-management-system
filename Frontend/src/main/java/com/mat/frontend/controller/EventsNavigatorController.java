@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class EventsNavigatorController {
+public class EventsNavigatorController extends BaseController {
     @FXML
     private Label informationLabel;
 
@@ -16,34 +16,6 @@ public class EventsNavigatorController {
     public void initialize() {
         if (SceneData.getData() instanceof String) {
             informationLabel.setText((String) SceneData.getData());
-        }
-    }
-
-    @FXML
-    private void handleLogout() {
-        Session.clear();
-        try {
-            SceneManager.switchScene("login.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleHome() {
-        try {
-            SceneManager.switchScene("home.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleEventsNavigator() {
-        try {
-            SceneManager.switchScene("events-navigator.fxml");
-        } catch (IOException exception) {
-            informationLabel.setText("Error: " + exception.getMessage());
         }
     }
 
@@ -82,5 +54,4 @@ public class EventsNavigatorController {
             informationLabel.setText("Error: " + exception.getMessage());
         }
     }
-
 }
