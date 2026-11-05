@@ -3,13 +3,12 @@ package com.mat.frontend.controller;
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
 import com.mat.frontend.api.dto.EventResponse;
+import com.mat.frontend.session.SceneData;
 import com.mat.frontend.session.Session;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -53,6 +52,10 @@ public class OrganizingEventsController {
     @FXML
     private TableColumn<EventResponse, Integer> registeredColumn;
 
+    // Button
+    @FXML
+    private TableColumn<EventResponse, Void> actionColumn;
+
 
     @FXML
     public void initialize() {
@@ -69,6 +72,35 @@ public class OrganizingEventsController {
             locationColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().location()));
             capacityColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().capacity()));
             registeredColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().registered()));
+
+            // Button
+            actionColumn.setCellFactory(c -> new TableCell<EventResponse, Void>() {
+                private final Button button = new Button("View");
+
+                {
+                    button.setOnAction(event -> {
+                        EventResponse selectedEvent = (EventResponse) getTableView().getItems().get(getIndex());
+
+                        SceneData.setSceneData(selectedEvent);
+                        try {
+                            SceneManager.switchScene("event-detailed.fxml");
+                        } catch (IOException exception) {
+                            informationLabel.setText("Error: " + exception.getMessage());
+                        }
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(button);
+                    }
+                }
+            });
 
             loadEvents();
         } else {
@@ -95,7 +127,9 @@ public class OrganizingEventsController {
             informationLabel.setText("Failed to load events: " + task.getException().getMessage());
         });
 
-        new Thread(task).start();
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     @FXML

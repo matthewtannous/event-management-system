@@ -44,7 +44,7 @@ public class AnnouncementController {
 
     // Return announcements by event
     @GetMapping("/event/{id}")
-    public List<AnnouncementResponse> getByEventId(@PathVariable Long id, @RequestParam("onlyPublic") boolean onlyPublic) {
+    public List<AnnouncementResponseDetailed> getByEventId(@PathVariable Long id, @RequestParam("onlyPublic") boolean onlyPublic) {
         return service.findAllByEventId(id, onlyPublic);
     }
 }

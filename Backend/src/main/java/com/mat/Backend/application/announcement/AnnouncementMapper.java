@@ -26,6 +26,18 @@ public class AnnouncementMapper {
         );
     }
 
+    public AnnouncementResponseDetailed toResponseDetailed(Announcement announcement) {
+        return new AnnouncementResponseDetailed(
+                announcement.getId(),
+                announcement.getMessage(),
+                announcement.isPublic(),
+                announcement.getUser().getId(),
+                announcement.getEvent().getId(),
+                announcement.getCreatedAt(),
+                announcement.getUser().getUsername()
+        );
+    }
+
     public void updateEntity(Announcement announcement, AnnouncementRequest request, User user, Event event) {
         announcement.setMessage(request.message());
         announcement.setPublic(request.isPublic());

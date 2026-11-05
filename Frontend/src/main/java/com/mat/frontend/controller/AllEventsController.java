@@ -52,8 +52,10 @@ public class AllEventsController {
     @FXML
     private TableColumn<EventResponse, Integer> registeredColumn;
 
+    // Button
     @FXML
     private TableColumn<EventResponse, Void> actionColumn;
+
 
     @FXML
     public void initialize() {
@@ -71,7 +73,7 @@ public class AllEventsController {
             capacityColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().capacity()));
             registeredColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().registered()));
 
-            // Button (not sure how it works)
+            // Button
             actionColumn.setCellFactory(c -> new TableCell<EventResponse, Void>() {
                 private final Button button = new Button("View");
 
@@ -99,6 +101,7 @@ public class AllEventsController {
                     }
                 }
             });
+
             loadEvents();
         } else {
             messageLabel.setText("What?!?!?!");
@@ -124,7 +127,9 @@ public class AllEventsController {
             informationLabel.setText("Failed to load events: " + task.getException().getMessage());
         });
 
-        new Thread(task).start();
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     @FXML

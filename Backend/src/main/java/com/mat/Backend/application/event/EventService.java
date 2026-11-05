@@ -80,6 +80,7 @@ public class EventService {
     }
 
     // Check if the new event does not conflict with other events
+    @Transactional
     private void checkEventConflict(Event event) {
         if (repository.existsEventConflict(event.getLocation(), event.getFromTime(), event.getToTime())) {
             throw new ConflictException("There is already an event scheduled at this location and time");
@@ -87,6 +88,7 @@ public class EventService {
     }
 
     // Check if the new event does not conflict with other events excluding itself
+    @Transactional
     private void checkEventConflictExcludingId(Event event, Long id) {
         if (repository.existsEventConflictExcludingId(event.getLocation(), event.getFromTime(), event.getToTime(), id)) {
             throw new ConflictException("There is already an event scheduled at this location and time");

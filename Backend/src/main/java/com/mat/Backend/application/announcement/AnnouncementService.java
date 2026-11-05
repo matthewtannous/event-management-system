@@ -26,16 +26,8 @@ public class AnnouncementService {
 
     @Transactional
     public AnnouncementResponse create(AnnouncementRequest request) {
-        User user = userRepository
-                .findById(request.userId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("User not found")
-                );
-        Event event = eventRepository
-                .findById(request.eventId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Event not found")
-                );
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Event event = eventRepository.findById(request.eventId()).orElseThrow(() -> new ResourceNotFoundException("Event not found"));
 
         Announcement announcement = mapper.toEntity(request, user, event);
         return mapper.toResponse(repository.save(announcement));
@@ -43,11 +35,7 @@ public class AnnouncementService {
 
     @Transactional
     public List<AnnouncementResponse> findAll() {
-        return repository
-                .findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
+        return repository.findAll().stream().map(mapper::toResponse).toList();
     }
 
     @Transactional
@@ -58,15 +46,8 @@ public class AnnouncementService {
     @Transactional
     public AnnouncementResponse update(Long id, AnnouncementRequest request) {
         Announcement announcement = findEntity(id);
-        User user = userRepository.findById(request.userId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("User not found")
-                );
-        Event event = eventRepository
-                .findById(request.eventId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Event not found")
-                );
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Event event = eventRepository.findById(request.eventId()).orElseThrow(() -> new ResourceNotFoundException("Event not found"));
 
         mapper.updateEntity(announcement, request, user, event);
         Announcement updatedAnnouncement = repository.save(announcement);
@@ -81,19 +62,20 @@ public class AnnouncementService {
     }
 
     private Announcement findEntity(Long id) {
-        return repository.findById(id)
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Announcement not found")
-                );
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Announcement not found"));
     }
 
     // Find all announcements for an event
-    List<AnnouncementResponse> findAllByEventId(Long eventId, Boolean onlyPublic) {
+    @Transactional
+    List<AnnouncementResponseDetailed> findAllByEventId(Long eventId, Boolean onlyPublic) {
         if (onlyPublic) {
             // Only return public announcements for event
-            return repository.findByEventIdAndIsPublicOrderByCreatedAtDesc(eventId, true).stream().map(mapper::toResponse).toList();
+            List<Announcement> ann = repository.findByEventIdAndIsPublicOrderByCreatedAtDesc(eventId, true);
+//            System.out.println("USERNAMEEEEE: " + ann.get(0).getUser().getUsername());
+
+            return repository.findByEventIdAndIsPublicOrderByCreatedAtDesc(eventId, true).stream().map(mapper::toResponseDetailed).toList();
         }
         // Return all announcements for event
-        return repository.findByEventIdOrderByCreatedAtDesc(eventId).stream().map(mapper::toResponse).toList();
+        return repository.findByEventIdOrderByCreatedAtDesc(eventId).stream().map(mapper::toResponseDetailed).toList();
     }
 }

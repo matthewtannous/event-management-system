@@ -3,14 +3,18 @@ package com.mat.frontend.controller;
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
 import com.mat.frontend.api.dto.AnnouncementResponse;
+import com.mat.frontend.api.dto.AnnouncementResponseDetailed;
 import com.mat.frontend.api.dto.EventResponse;
 import com.mat.frontend.api.dto.ParticipantResponse;
 import com.mat.frontend.session.SceneData;
 import com.mat.frontend.session.Session;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,10 +51,7 @@ public class EventDetailedController {
 //    private Button registrationButton;
 
     @FXML
-    private Label announcerLabel;
-
-    @FXML
-    private Label announcementLabel;
+    private VBox announcementsContainer;
 
     @FXML
     private Button actionButton;
@@ -112,15 +113,48 @@ public class EventDetailedController {
             informationLabel.setText(task.getException().getMessage());
         });
 
-        new Thread(task).start();
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     @FXML
     public void fillAnnouncements(Long eventId, boolean onlyPublic) {
-        List<AnnouncementResponse> announcements = ApiClient.getAnnouncementsForEvent(eventId, onlyPublic);
-        if (!announcements.isEmpty()) {
-            announcerLabel.setText(announcements.get(0).userId().toString());
-            announcementLabel.setText(ApiClient.getUser(announcements.get(0).userId()).username());
+        List<AnnouncementResponseDetailed> announcements = ApiClient.getAnnouncementsForEvent(eventId, onlyPublic);
+        if (announcements.isEmpty()) {
+            announcementsContainer.setVisible(false);
+            announcementsContainer.setManaged(false);
+            return;
+        }
+
+        announcementsContainer.setVisible(true);
+        announcementsContainer.setManaged(true);
+
+        for (AnnouncementResponseDetailed announcement : announcements) {
+            // Add announcer
+            HBox announcerBox = new HBox();
+            announcerBox.setAlignment(Pos.CENTER);
+
+            Label fromLabel = new Label("Announcement from: ");
+            Label announcerLabel = new Label(announcement.username());
+
+            announcerBox.getChildren().addAll(fromLabel, announcerLabel);
+
+            // Add message
+            HBox messageBox = new HBox();
+            messageBox.setAlignment(Pos.CENTER);
+
+            Label announcementLabel = new Label(announcement.message());
+//            announcementLabel.setPrefSize(200, 400);
+            announcementLabel.setWrapText(true);
+
+            messageBox.getChildren().add(announcerBox);
+
+            VBox announcementBox = new VBox();
+            announcementBox.setAlignment(Pos.CENTER);
+            announcementBox.getChildren().addAll(announcerBox, announcementLabel);
+
+            announcementsContainer.getChildren().add(announcementBox);
         }
     }
 

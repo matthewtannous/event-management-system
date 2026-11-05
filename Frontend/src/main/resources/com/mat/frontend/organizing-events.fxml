@@ -23,15 +23,18 @@
 
         <TableView fx:id="organizingEventsTable">
             <columns>
-<!--                <TableColumn fx:id="idColumn" prefWidth="50" text="ID"/>-->
+                <!-- <TableColumn fx:id="idColumn" prefWidth="50" text="ID"/>-->
                 <TableColumn fx:id="nameColumn" prefWidth="150" text="Event name"/>
-<!--                <TableColumn fx:id="descriptionColumn" prefWidth="200" text="Event description"/>-->
+                <!-- <TableColumn fx:id="descriptionColumn" prefWidth="200" text="Event description"/>-->
                 <TableColumn fx:id="fromTimeColumn" prefWidth="150" text="Starts at"/>
                 <TableColumn fx:id="toTimeColumn" prefWidth="150" text="Ends at"/>
-<!--                <TableColumn fx:id="ticketPriceColumn" prefWidth="150" text="Ticket price"/>-->
+                <!-- <TableColumn fx:id="ticketPriceColumn" prefWidth="150" text="Ticket price"/>-->
                 <TableColumn fx:id="locationColumn" prefWidth="150" text="Location"/>
                 <TableColumn fx:id="capacityColumn" prefWidth="100" text="Capacity"/>
                 <TableColumn fx:id="registeredColumn" prefWidth="100" text="Registered"/>
+
+                <!-- Button -->
+                <TableColumn fx:id="actionColumn" prefWidth="100" text="Details"/>
             </columns>
         </TableView>
     </center>

@@ -100,6 +100,7 @@ public class ParticipantService {
     }
 
     // Check if user organizes an event
+    @Transactional
     boolean userOrganizesEvent(Long userId, Long eventId) {
         return repository.existsByUserIdAndEventId(userId, eventId);
     }

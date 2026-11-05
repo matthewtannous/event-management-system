@@ -76,6 +76,7 @@ public class OrganizerService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Organizer not found"));
     }
 
+    @Transactional
     // Check if a user participates in an event
     boolean userParticipatesInEvent(Long userId, Long eventId) {
         return repository.existsByUserIdAndEventId(userId, eventId);

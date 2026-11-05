@@ -121,8 +121,8 @@ public class ApiClient {
         send(HttpRequest.newBuilder(URI.create(BASE_URL + "/announcements/" + id)).DELETE().build());
     }
 
-    public static List<AnnouncementResponse> getAnnouncementsForEvent(Long eventId, boolean onlyPublic) {
-        return get("/announcements/event/" + eventId + "?onlyPublic=" + onlyPublic, new TypeReference<List<AnnouncementResponse>>() {
+    public static List<AnnouncementResponseDetailed> getAnnouncementsForEvent(Long eventId, boolean onlyPublic) {
+        return get("/announcements/event/" + eventId + "?onlyPublic=" + onlyPublic, new TypeReference<List<AnnouncementResponseDetailed>>() {
         });
     }
 
