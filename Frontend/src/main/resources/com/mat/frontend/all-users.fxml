@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.mat.frontend.controller.AllUsersController">
     <padding>
@@ -20,17 +21,19 @@
     </top>
 
     <center>
-        <Label fx:id="messageLabel"/>
+        <VBox>
+            <Label fx:id="messageLabel"/>
 
-        <TableView fx:id="allUsersTable">
-            <columns>
-                <!-- <TableColumn fx:id="idColumn" prefWidth="50" text="ID"/>-->
-                <TableColumn fx:id="usernameColumn" prefWidth="150" text="Username"/>
-                <TableColumn fx:id="firstNameColumn" prefWidth="150" text="Last Name"/>
-                <TableColumn fx:id="lastNameColumn" prefWidth="150" text="Last Name"/>
-                <TableColumn fx:id="emailColumn" prefWidth="150" text="Email"/>
-            </columns>
-        </TableView>
+            <TableView fx:id="allUsersTable">
+                <columns>
+                    <!-- <TableColumn fx:id="idColumn" prefWidth="50" text="ID"/>-->
+                    <TableColumn fx:id="usernameColumn" prefWidth="150" text="Username"/>
+                    <TableColumn fx:id="firstNameColumn" prefWidth="150" text="Last Name"/>
+                    <TableColumn fx:id="lastNameColumn" prefWidth="150" text="Last Name"/>
+                    <TableColumn fx:id="emailColumn" prefWidth="150" text="Email"/>
+                </columns>
+            </TableView>
+        </VBox>
     </center>
 
     <bottom>

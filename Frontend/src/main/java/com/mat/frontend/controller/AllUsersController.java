@@ -41,7 +41,7 @@ public class AllUsersController extends BaseController {
     @FXML
     public void initialize() {
         if (Session.getCurrentUser() != null) {
-            messageLabel.setText("All events:");
+            messageLabel.setText("All users:");
 
             // data binding
 //            idColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().id()));
@@ -50,14 +50,14 @@ public class AllUsersController extends BaseController {
             lastNameColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().lastName()));
             emailColumn.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().email()));
 
-            loadEvents();
+            loadUsers();
         } else {
             messageLabel.setText("What?!?!?!");
         }
     }
 
     @FXML
-    private void loadEvents() {
+    private void loadUsers() {
         informationLabel.setText("Loading events...");
         Task<List<UserResponse>> task = new Task<List<UserResponse>>() {
             @Override

@@ -62,6 +62,12 @@ public class ApiClient {
         send(HttpRequest.newBuilder(URI.create(BASE_URL + "/users/" + id)).DELETE().build());
     }
 
+    // Other
+    public static List<UserResponse> getUsersNotInEvent(Long eventId) {
+        return get("/users/not-in-event/" + eventId, new TypeReference<List<UserResponse>>() {
+        });
+    }
+
 
     /* Events */
     public static List<EventResponse> getEvents() {

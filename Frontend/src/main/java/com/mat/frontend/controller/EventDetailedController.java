@@ -56,6 +56,9 @@ public class EventDetailedController extends BaseController {
     private Button actionButton;
 
     @FXML
+    private Button actionButton2;
+
+    @FXML
     public void initialize() {
         if (!(SceneData.getData() instanceof EventResponse)) {
             informationLabel.setText("An error occurred");
@@ -86,6 +89,12 @@ public class EventDetailedController extends BaseController {
             actionButton.setText("Create announcement");
             informationLabel.setText("You are organizing this event!");
             fillAnnouncements(event.id(), false); // get public and private announcements
+
+            // Set actionButton2 to add organizers
+            actionButton2.setVisible(true);
+            actionButton2.setManaged(true);
+            actionButton2.setText("Add organizer");
+            actionButton2.setOnAction(e -> handleAddOrganizer());
         } else {
             actionButton.setOnAction(e -> handleRegisterForEvent());
             actionButton.setText("Register");
@@ -101,7 +110,7 @@ public class EventDetailedController extends BaseController {
             }
         };
         task.setOnSucceeded(event -> {
-            SceneData.setSceneData("You have register for the event: " + ((EventResponse) SceneData.getData()).name());
+            SceneData.setSceneData("You have registered for the event: " + ((EventResponse) SceneData.getData()).name());
             // informationLabel.setText("Registration successful!");
 
             // Go back
@@ -161,6 +170,15 @@ public class EventDetailedController extends BaseController {
     public void handleAnnouncementCreation() {
         try {
             SceneManager.switchScene("create-announcement.fxml");
+        } catch (IOException exception) {
+            informationLabel.setText("Error: " + exception.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleAddOrganizer() {
+        try {
+            SceneManager.switchScene("create-organizer.fxml");
         } catch (IOException exception) {
             informationLabel.setText("Error: " + exception.getMessage());
         }

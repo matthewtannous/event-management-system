@@ -63,6 +63,8 @@
             <!-- <Button text="Register" onAction="#handleRegisterForEvent" fx:id="registrationButton"/> -->
             <Button fx:id="actionButton"/>
 
+            <Button fx:id="actionButton2" visible="false" managed="false"/>
+
             <Label alignment="CENTER" fx:id="informationLabel"/>
 
             <!-- Announcements-->
