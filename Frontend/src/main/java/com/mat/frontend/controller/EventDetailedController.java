@@ -2,7 +2,6 @@ package com.mat.frontend.controller;
 
 import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
-import com.mat.frontend.api.dto.AnnouncementResponse;
 import com.mat.frontend.api.dto.AnnouncementResponseDetailed;
 import com.mat.frontend.api.dto.EventResponse;
 import com.mat.frontend.api.dto.ParticipantResponse;
@@ -19,7 +18,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
-public class EventDetailedController extends BaseController{
+public class EventDetailedController extends BaseController {
     @FXML
     private Label informationLabel;
 

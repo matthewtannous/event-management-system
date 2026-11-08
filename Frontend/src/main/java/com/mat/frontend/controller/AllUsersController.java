@@ -1,17 +1,15 @@
 package com.mat.frontend.controller;
 
-import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
 import com.mat.frontend.api.dto.UserResponse;
-import com.mat.frontend.session.SceneData;
 import com.mat.frontend.session.Session;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class AllUsersController extends BaseController {

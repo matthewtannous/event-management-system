@@ -1,6 +1,5 @@
 package com.mat.frontend.controller;
 
-import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
 import com.mat.frontend.api.dto.EventResponse;
 import com.mat.frontend.session.Session;

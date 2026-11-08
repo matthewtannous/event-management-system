@@ -2,7 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.mat.frontend.controller.HomeController">
     <padding>
@@ -20,32 +21,32 @@
     <center>
         <Label fx:id="messageLabel" text="Hello There"/>
 
-        <VBox alignment="CENTER" spacing="25">
-            <HBox alignment="CENTER" spacing="15">
-                <Label text="Id: "/>
-                <Label fx:id="idLabel"/>
-            </HBox>
+<!--        <VBox alignment="CENTER" spacing="25">-->
+<!--            <HBox alignment="CENTER" spacing="15">-->
+<!--                <Label text="Id: "/>-->
+<!--                <Label fx:id="idLabel"/>-->
+<!--            </HBox>-->
 
-            <HBox alignment="CENTER" spacing="15">
-                <Label text="Username: "/>
-                <Label fx:id="usernameLabel"/>
-            </HBox>
+<!--            <HBox alignment="CENTER" spacing="15">-->
+<!--                <Label text="Username: "/>-->
+<!--                <Label fx:id="usernameLabel"/>-->
+<!--            </HBox>-->
 
-            <HBox alignment="CENTER" spacing="15">
-                <Label text="First Name: "/>
-                <Label fx:id="firstNameLabel"/>
-            </HBox>
+<!--            <HBox alignment="CENTER" spacing="15">-->
+<!--                <Label text="First Name: "/>-->
+<!--                <Label fx:id="firstNameLabel"/>-->
+<!--            </HBox>-->
 
-            <HBox alignment="CENTER" spacing="15">
-                <Label text="Last Name: "/>
-                <Label fx:id="lastNameLabel"/>
-            </HBox>
+<!--            <HBox alignment="CENTER" spacing="15">-->
+<!--                <Label text="Last Name: "/>-->
+<!--                <Label fx:id="lastNameLabel"/>-->
+<!--            </HBox>-->
 
-            <HBox alignment="CENTER" spacing="15">
-                <Label text="Email: "/>
-                <Label fx:id="emailLabel"/>
-            </HBox>
-        </VBox>
+<!--            <HBox alignment="CENTER" spacing="15">-->
+<!--                <Label text="Email: "/>-->
+<!--                <Label fx:id="emailLabel"/>-->
+<!--            </HBox>-->
+<!--        </VBox>-->
     </center>
 
     <bottom>

@@ -1,6 +1,5 @@
 package com.mat.frontend.controller;
 
-import com.mat.frontend.SceneManager;
 import com.mat.frontend.api.ApiClient;
 import com.mat.frontend.api.dto.AnnouncementResponse;
 import com.mat.frontend.api.dto.EventResponse;
@@ -11,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
 

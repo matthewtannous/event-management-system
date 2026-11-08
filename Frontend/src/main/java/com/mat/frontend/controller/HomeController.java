@@ -35,11 +35,11 @@ public class HomeController extends BaseController {
         }
 
         LoginResponse user = Session.getCurrentUser();
-        messageLabel.setText("Hello," + user.username());
-        idLabel.setText(user.id().toString());
-        usernameLabel.setText(user.username());
-        firstNameLabel.setText(user.firstName());
-        lastNameLabel.setText(user.lastName());
-        emailLabel.setText(user.email());
+        messageLabel.setText("Hello, " + user.username() + "!!");
+//        idLabel.setText(user.id().toString());
+//        usernameLabel.setText(user.username());
+//        firstNameLabel.setText(user.firstName());
+//        lastNameLabel.setText(user.lastName());
+//        emailLabel.setText(user.email());
     }
 }
