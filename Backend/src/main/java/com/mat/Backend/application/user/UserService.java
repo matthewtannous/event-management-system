@@ -56,4 +56,11 @@ public class UserService {
     private User findEntityById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
+
+    // Other
+    @Transactional
+    public List<UserResponse> findAllNotInEvent(Long eventId) {
+        return repository.findUsersNotInEvent(eventId).stream().map(mapper::toResponse).toList();
+    }
+
 }

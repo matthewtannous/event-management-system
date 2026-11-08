@@ -39,4 +39,10 @@ public class UserController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    // Other
+    @GetMapping("/not-in-event/{eventId}")
+    public Iterable<UserResponse> findNotInEvent(@PathVariable Long eventId) {
+        return service.findAllNotInEvent(eventId);
+    }
 }
